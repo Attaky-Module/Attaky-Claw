@@ -1,0 +1,89 @@
+# Build output
+build/
+tmp/
+releases/
+
+# ESP-IDF
+sdkconfig
+sdkconfig.old
+sdkconfig.priv
+sdkconfig.bmgr_board.old
+
+# ignore all generated dependencies.lock EXCEPT this one fork lockfile,
+# which is tracked on purpose to pin the registry component
+# versions/hashes the vendored patches were authored against.
+dependencies.lock
+!/application/edge_agent/dependencies.lock
+
+# managed_components/ is the IDF Component Manager download cache and is
+# ignored as a whole, EXCEPT a small allow-list of files we maintain as
+# fork-local vendored patches. The re-inclusion chain below re-includes
+# each parent directory then re-excludes its other contents, so ONLY the
+# explicitly named files are tracked -- no other component, and no other
+# file inside a patched component, is version-controlled.
+# Leading **/ so the base ignore matches managed_components at ANY depth
+# (e.g. a future sibling app tree), not just a repo-root one; the
+# anchored re-inclusion chain below still surgically tracks only build.py.
+**/managed_components/*
+!/application/edge_agent/managed_components/
+/application/edge_agent/managed_components/*
+!/application/edge_agent/managed_components/espressif2022__esp_emote_assets/
+/application/edge_agent/managed_components/espressif2022__esp_emote_assets/*
+!/application/edge_agent/managed_components/espressif2022__esp_emote_assets/scripts/
+/application/edge_agent/managed_components/espressif2022__esp_emote_assets/scripts/*
+!/application/edge_agent/managed_components/espressif2022__esp_emote_assets/scripts/spiffs_assets/
+/application/edge_agent/managed_components/espressif2022__esp_emote_assets/scripts/spiffs_assets/*
+!/application/edge_agent/managed_components/espressif2022__esp_emote_assets/scripts/spiffs_assets/build.py
+
+# espressif2022__esp_emote_expression: fork-local vendored patches for the
+# status-cluster redesign (status slot image->anim, battery/charge removal,
+# emote_set_status_state API). Re-include only the specific patched files,
+# re-excluding every other file in each parent directory along the way so
+# no other source in this component is version-controlled.
+!/application/edge_agent/managed_components/espressif2022__esp_emote_expression/
+/application/edge_agent/managed_components/espressif2022__esp_emote_expression/*
+!/application/edge_agent/managed_components/espressif2022__esp_emote_expression/src/
+/application/edge_agent/managed_components/espressif2022__esp_emote_expression/src/*
+!/application/edge_agent/managed_components/espressif2022__esp_emote_expression/src/emote_setup.c
+!/application/edge_agent/managed_components/espressif2022__esp_emote_expression/src/emote_op.c
+!/application/edge_agent/managed_components/espressif2022__esp_emote_expression/src/emote_load.c
+!/application/edge_agent/managed_components/espressif2022__esp_emote_expression/include/
+/application/edge_agent/managed_components/espressif2022__esp_emote_expression/include/*
+!/application/edge_agent/managed_components/espressif2022__esp_emote_expression/include/expression_emote/
+/application/edge_agent/managed_components/espressif2022__esp_emote_expression/include/expression_emote/*
+!/application/edge_agent/managed_components/espressif2022__esp_emote_expression/include/expression_emote/emote_api.h
+
+# IDE / Editor
+.vscode/
+.devcontainer/
+.idea/
+.clangd
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+# Cache / Compiled
+.cache
+*.pyc
+
+# MCP / Memov
+.mcp.json
+.mem/
+.memignore
+# OS
+.DS_Store
+Thumbs.db
+.venv/
+
+.codex
+openspec
+AGENTS.md
+
+# Docs
+docs/node_modules
+docs/public/d2
+docs/dist
+docs/.astro
+docs/**/*.bin

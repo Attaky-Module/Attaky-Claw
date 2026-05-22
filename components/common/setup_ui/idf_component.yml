@@ -1,0 +1,14 @@
+## IDF Component Manager Manifest File
+dependencies:
+
+  claw_core:
+    path: ../../claw_modules/claw_core
+
+  display_arbiter:
+    path: ../display_arbiter
+
+  emote:
+    path: ../emote
+
+  wifi_manager:
+    path: ../wifi_manager

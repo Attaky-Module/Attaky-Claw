@@ -1,0 +1,32 @@
+---
+title: Assemble Attaky Claw
+description: Assemble Attaky Claw.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+<Steps>
+
+1. **Install ESP32-S3-DevKitC-1 on the breadboard**
+
+    Place ESP32-S3-DevKitC-1 at the center of one breadboard, leaving one empty column on each side for later peripheral wiring.
+
+2. **Connect a display (optional)**
+
+    Connect a display as shown in the diagram above. Make sure display power is connected to the 3V3 power pin.
+
+3. **Connect a USB camera (optional)**
+
+    On ESP32-S3, GPIO20 and GPIO19 map to USB D+ and D-. The USB camera also needs power, which can be taken from the ESP32-S3 5V pin.
+
+    For the recommended USB camera sample, the 2-pin connector near the USB port can connect a speaker, and the 2-pin connector on the other side can connect a microphone.
+
+4. **Connect a WS2812 strip/ring (optional)**
+
+    The WS2812 strip/ring needs power, which can be taken from the ESP32-S3 5V pin. The DATA IN pin should be connected to ESP32-S3 GPIO14.
+
+5. **Connect a servo (optional)**
+
+    The servo requires 5V power, available from the ESP32-S3 5V pin. The servo PWM signal pin should connect to ESP32-S3 GPIO47.
+
+</Steps>

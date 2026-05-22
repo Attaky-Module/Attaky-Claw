@@ -1,0 +1,203 @@
+version: 1.0.0
+# Devices Configuration - Attaky Agent Deck 1.0
+# I2C addresses below use the 8-bit (shifted) form the board manager
+# expects; the 7-bit address is noted in each comment.
+devices:
+
+  # Internal AW9523B #1 @ 7-bit 0x58 (8-bit 0xB0).
+  # Inputs only: ST7789 INT (P04), STK3311-X INT (P05),
+  # QMI8658A INT2 (P15) / INT1 (P16), AW9523B@0x59 chained INTN (P17),
+  # plus Keyboard Bottom L_INT (P01) / R_INT (P07) via FPC passthrough.
+  # Mask indices are linear 0..15: P00..P07 = 0..7, P10..P17 = 8..15.
+  - name: gpio_expander_int
+    chip: aw9523b
+    type: gpio_expander
+    version: default
+    dependencies:
+      esp_io_expander_aw9523b:
+        override_path: "${BOARD_PATH}/components/esp_io_expander_aw9523b"
+        require: public
+    config:
+      max_pins: 16
+      output_io_mask: []
+      input_io_mask: [1, 4, 5, 7, 13, 14, 15]
+    peripherals:
+      - name: i2c_master
+        i2c_addr: [0xB0]
+
+  # Internal AW9523B #2 @ 7-bit 0x59 (8-bit 0xB2).
+  # Inputs P00..P07 = DOWN/RIGHT/SELECT/LEFT/UP/BTN_L1/BTN_R2/POWER_BTN.
+  # Outputs (active-low) P10/P11/P12 = RGB R/G/B, P13 = CTP_RESET.
+  # Linear indices: P10..P13 = 8..11. P00..P07 inputs = 0..7.
+  # NOTE: POWER_BTN (P07) long-press is a hardware power toggle handled
+  # by the power path; firmware can use short-press only, never long-press.
+  - name: gpio_expander_io
+    chip: aw9523b
+    type: gpio_expander
+    version: default
+    dependencies:
+      esp_io_expander_aw9523b:
+        override_path: "${BOARD_PATH}/components/esp_io_expander_aw9523b"
+        require: public
+    config:
+      max_pins: 16
+      output_io_mask: [8, 9, 10, 11]
+      output_io_level_mask: [1, 1, 1, 1]
+      input_io_mask: [0, 1, 2, 3, 4, 5, 6, 7]
+    peripherals:
+      - name: i2c_master
+        i2c_addr: [0xB2]
+
+  # Keyboard Bottom left half AW9523B @ 7-bit 0x5A (8-bit 0xB4).
+  # Detachable module: init_skip so boot does not fail when absent.
+  # Rows P10..P14 (drive low to scan), cols P00..P04 (read), RGB P15..P17.
+  # Linear indices: P00..P04 = 0..4, P10..P17 = 8..15.
+  - name: gpio_expander_kbd_l
+    chip: aw9523b
+    type: gpio_expander
+    version: default
+    init_skip: true
+    dependencies:
+      esp_io_expander_aw9523b:
+        override_path: "${BOARD_PATH}/components/esp_io_expander_aw9523b"
+        require: public
+    config:
+      max_pins: 16
+      output_io_mask: [8, 9, 10, 11, 12, 13, 14, 15]
+      output_io_level_mask: [1, 1, 1, 1, 1, 1, 1, 1]
+      input_io_mask: [0, 1, 2, 3, 4]
+    peripherals:
+      - name: i2c_master
+        i2c_addr: [0xB4]
+
+  # Keyboard Bottom right half AW9523B @ 7-bit 0x5B (8-bit 0xB6).
+  - name: gpio_expander_kbd_r
+    chip: aw9523b
+    type: gpio_expander
+    version: default
+    init_skip: true
+    dependencies:
+      esp_io_expander_aw9523b:
+        override_path: "${BOARD_PATH}/components/esp_io_expander_aw9523b"
+        require: public
+    config:
+      max_pins: 16
+      output_io_mask: [8, 9, 10, 11, 12, 13, 14, 15]
+      output_io_level_mask: [1, 1, 1, 1, 1, 1, 1, 1]
+      input_io_mask: [0, 1, 2, 3, 4]
+    peripherals:
+      - name: i2c_master
+        i2c_addr: [0xB6]
+
+  # NS4168 mono class-D speaker amp - codec-less I2S sink.
+  - name: audio_dac
+    chip: internal
+    type: audio_codec
+    version: default
+    config:
+      adc_enabled: false
+      dac_enabled: true
+      dac_max_channel: 2
+      dac_channel_mask: "11"
+      dac_init_gain: 0
+      mclk_enabled: false
+    peripherals:
+      - name: i2s_audio_out
+
+  # ICS-43434 I2S MEMS microphone - codec-less I2S source.
+  - name: audio_adc
+    chip: internal
+    type: audio_codec
+    version: default
+    config:
+      adc_enabled: true
+      dac_enabled: false
+      adc_max_channel: 1
+      adc_channel_mask: "1"
+      adc_init_gain: 0
+      mclk_enabled: false
+    peripherals:
+      - name: i2s_audio_in
+
+  # Media-IO push-in SD card slot (1-bit, SPI mode). Detachable media:
+  # init_skip so boot does not fail when no card / no module is present.
+  - name: fs_sdcard
+    type: fs_fat
+    sub_type: spi
+    version: default
+    init_skip: true
+    config:
+      sub_config:
+        cs_gpio_num: 8
+        frequency: SDMMC_FREQ_DEFAULT
+    peripherals:
+      - name: spi_sdcard
+
+  # ST7789 240x320 TFT over 4-wire SPI. The panel is physically mounted
+  # rotated 180 degrees relative to the controller default; swap_xy gives
+  # a landscape 320x240 surface. mirror_x/mirror_y confirmed on hardware
+  # (matches the same-family ST7789 reference board).
+  - name: display_lcd
+    chip: st7789
+    type: display_lcd
+    sub_type: spi
+    version: default
+    config:
+      mirror_x: false
+      mirror_y: true
+      swap_xy: true
+      invert_color: true
+      x_max: 320
+      y_max: 240
+      io_spi_config:
+        cs_gpio_num: 45
+        dc_gpio_num: 12
+        spi_mode: 0
+        pclk_hz: 40000000
+      lcd_panel_config:
+        reset_gpio_num: 10
+        data_endian: LCD_RGB_DATA_ENDIAN_BIG
+        vendor_config: NULL
+    peripherals:
+      - name: spi_display
+
+  # FT6636 capacitive touch controller (7-bit 0x38 -> 8-bit 0x70).
+  # Polled: no INT line is wired to an ESP32 GPIO (int_gpio_num: -1).
+  # CTP_RESET is on internal AW9523B @0x59 (gpio_expander_io) P13, NOT a
+  # direct ESP32 GPIO, so rst_gpio_num: -1 and the reset pulse is driven
+  # by the touch factory entry. Landscape transform mirrors the ST7789
+  # display device (swap_xy: true, mirror_x: false, mirror_y: true) so
+  # touch axes match the upright 320x240 image.
+  # x_max/y_max are the FT6636 NATIVE portrait resolution (240x320),
+  # i.e. the controller's pre-swap coordinate space. esp_lcd_touch
+  # applies mirror_x/mirror_y BEFORE swap_xy, so the mirror bounds must
+  # use the native (pre-swap) dims, not the post-swap 320x240 landscape.
+  - name: lcd_touch
+    chip: ft5x06
+    type: lcd_touch
+    sub_type: i2c
+    version: default
+    dependencies:
+      esp_lcd_touch:
+        version: "*"
+        require: public
+      espressif/esp_lcd_touch_ft5x06: "^1.0.0"
+    config:
+      io_i2c_config:
+        lcd_cmd_bits: 8
+        scl_speed_hz: 400000
+      touch_config:
+        x_max: 240
+        y_max: 320
+        rst_gpio_num: -1
+        int_gpio_num: -1
+        levels:
+          reset: 0
+          interrupt: 0
+        flags:
+          swap_xy: true
+          mirror_x: false
+          mirror_y: true
+    peripherals:
+      - name: i2c_master
+        i2c_addr: [0x70]

@@ -1,0 +1,68 @@
+## IDF Component Manager Manifest File
+dependencies:
+  espressif/esp_board_manager:
+    version: "^0.5.10"
+    public: true
+  espressif/esp_wifi_remote:
+    version: ">=0.10,<2.0"
+    rules:
+      - if: "target in [esp32p4]"
+  espressif/esp_hosted:
+    version: "2.12.3"
+    rules:
+      - if: "target in [esp32p4]"
+
+  # Phase 5.1: custom iot_button driver for the physical SELECT button
+  # (AW9523B I2C expander pin P02). espressif/button is only pulled as
+  # a PRIVATE dep of lua_module_button today, so its headers
+  # (iot_button.h / button_interface.h) do not reach main — main needs
+  # its own public dependency.
+  espressif/button:
+    version: "^4.1.4"
+
+  espressif/esp_lcd_touch_ft5x06:
+    version: "^1"
+
+  espressif2022/esp_emote_expression:
+    version: "^1.0.0"
+
+  espressif2022/esp_emote_gfx:
+    version: "3.0.2"
+
+  app_claw:
+    path: ../../../components/common/app_claw
+
+  app_config:
+    path: ../components/app_config
+
+  captive_dns:
+    path: ../../../components/common/captive_dns
+
+  emote:
+    path: ../../../components/common/emote
+    rules:
+      - if: $CONFIG{ESP_BOARD_DEV_DISPLAY_LCD_SUPPORT} == True
+
+  http_reuse:
+    path: ../../../components/common/http_reuse
+
+  http_server:
+    path: ../components/http_server
+
+  settings:
+    path: ../../../components/common/settings
+
+  # On-device first-use + settings UI (setup_ui_run): WiFi + LLM
+  # provisioning over the FT6636 touch panel.
+  setup_ui:
+    path: ../../../components/common/setup_ui
+
+  # Task 4.3b: onboard RGB-LED glue. main calls status_led_start() in
+  # app_main after the board manager + gpio_expander_io are up, so its
+  # header must reach main directly (status_led is otherwise only a
+  # leaf component with no other consumer).
+  status_led:
+    path: ../../../components/common/status_led
+
+  wifi_manager:
+    path: ../../../components/common/wifi_manager

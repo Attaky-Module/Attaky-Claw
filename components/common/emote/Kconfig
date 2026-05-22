@@ -1,0 +1,13 @@
+menu "Emote"
+
+    config APP_EMOTE_DEBUG_CONSOLE
+        bool "On-device emote debug console"
+        default y
+        help
+            Register the `emote` serial console command and the
+            emote_debug_show/event/bat helpers used to review faces,
+            state events (listen/speak/idle) and battery rendering
+            directly on hardware. Intended for development builds;
+            disable for release images to drop the debug surface.
+
+endmenu

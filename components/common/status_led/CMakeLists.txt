@@ -1,0 +1,15 @@
+idf_component_register(
+    SRCS
+        "status_led.c"
+        "status_led_logic.c"
+    INCLUDE_DIRS
+        "include"
+    PRIV_INCLUDE_DIRS
+        "."
+    PRIV_REQUIRES
+        espressif__esp_board_manager
+        esp_io_expander
+        esp_io_expander_aw9523b
+        esp_timer
+        status_state
+)

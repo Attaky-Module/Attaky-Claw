@@ -1,0 +1,102 @@
+---
+title: Prepare materials
+description: Prepare hardware materials for the ESP32-S3 breadboard version of Attaky Claw.
+---
+
+import { LinkCard } from '@astrojs/starlight/components';
+
+import Ws2812Png from "@/assets/images/ws2812.png?url";
+import Ws2812WebP from "@/assets/images/ws2812.webp?url";
+
+For the breadboard form of Attaky Claw, you need one ESP32-S3 dev board, one or more breadboards, and optional extension peripherals.
+
+## Required hardware
+
+### ESP32-S3 dev board
+
+To run Attaky Claw, you need an ESP32-S3 with **at least 8 MB Flash and 8 MB PSRAM**.
+
+**We recommend an official ESP32-S3-DevKitC-1 board**. It exposes more pins and is suitable for breadboard assembly.
+You can buy it from major electronics distributors.
+
+<LinkCard 
+    title="ESP32-S3-DevKitC-1 sample purchase channels"
+    href="https://www.espressif.com/en/contact-us/get-samples"
+    description="Buy ESP32-S3-DevKitC-1 from official distributor"
+/>
+
+<LinkCard 
+    title="ESP32-S3-DevKitC-1 on Taobao"
+    href="https://item.taobao.com/item.htm?id=653155344338"
+    description="Select a variant with at least 8 MB Flash and 8 MB PSRAM"
+/>
+
+### Breadboard
+
+Prepare a breadboard with 400 tie points or more. It is recommended to reserve extra breadboards for optional peripherals.
+
+### Wires and Dupont cables
+
+Wires and Dupont jumper cables are needed for connections. Prepare enough quantity for wiring.
+
+## Optional peripherals
+
+Attaky Claw supports various extensions, including display, camera, microphone, and speaker.
+These peripherals make interactions richer.
+
+### Display
+
+Attaky Claw supports external displays. The web flasher firmware is configured for a 2.0-inch SPI TFT color panel; a compatible model is linked below.
+
+<LinkCard
+    title="2.0-inch SPI TFT color display panel"
+    href="https://item.taobao.com/item.htm?id=851909895424"
+    description="Select: 2.0-inch, 8-pin blue board module, with header pins"
+/>
+
+If you choose another display, you may need software adaptation.
+
+### Camera
+
+Attaky Claw supports USB cameras for vision features. Even without a vision-capable model, captured images can still be sent to users.
+
+For ESP32-S3, the USB camera should meet the requirements in the [USB Stream User Guide](https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_host/usb_stream.html#id1).
+
+<LinkCard
+    title="USB camera on Taobao"
+    href="https://item.taobao.com/item.htm?id=848914354287"
+    description="This camera meets the requirements above"
+/>
+
+If you buy the recommended USB camera sample, it is recommended to also buy an MX1.25 4-pin single-ended cable (male) for breadboard wiring later.
+
+### Microphone & speaker
+
+Besides USB-UVC (USB camera), Attaky Claw also supports USB-UAC (microphone and speaker).
+
+If you use the recommended USB camera sample, you only need to buy a microphone and speaker and connect them to the reserved ports on the camera with MX1.25 2-pin terminals.
+
+### WS2812 light strip/ring
+
+<picture>
+    <source srcset={Ws2812WebP} type="image/webp" />
+    <img src={Ws2812Png} alt="WS2812" width="30%" style="display: block; margin: 0 auto;" />
+</picture>
+
+In addition to the built-in WS2812 LED on ESP32-S3-DevKitC-1, you can connect a WS2812 strip/ring to extend lighting effects.
+
+Due to power limits, do not connect an overly long WS2812 strip/ring.
+You can choose the WS2812 ring with the same model as the [demo image](https://detail.tmall.com/item.htm?id=994762490273&skuId=6139364670619).
+
+### Servo
+
+Attaky Claw supports servos for mechanical motion.
+You can choose a common servo, such as [this one](https://item.taobao.com/item.htm?id=1016474722460).
+
+---
+
+<LinkCard
+    title="Next step: Assemble Attaky Claw"
+    href="@lang/tutorial/assemble"
+    description="After preparing hardware materials, you can start assembling Attaky Claw."
+/>

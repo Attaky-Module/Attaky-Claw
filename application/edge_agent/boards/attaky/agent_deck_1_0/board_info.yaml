@@ -1,0 +1,5 @@
+board: agent_deck_1_0
+chip: esp32s3
+version: 1.0.0
+description: "Attaky Agent Deck 1.0 (Core ESP32 + Media-IO + Keyboard Bottom + Standard Cell)"
+manufacturer: "Attaky"

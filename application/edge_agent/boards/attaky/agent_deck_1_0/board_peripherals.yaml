@@ -1,0 +1,111 @@
+version: 1.0.0
+# Peripherals Configuration - Attaky Agent Deck 1.0
+# Pin assignments are derived from the Attaky host pin table and the
+# Core ESP32 1.0 / Media-IO 1.0 module wiring. See README.md for the full
+# signal-to-GPIO derivation and the items still pending on-hardware check.
+peripherals:
+  # Shared I2C bus (ESP32 IO1=SCL, IO2=SDA, external pull-ups on module).
+  # On-bus: STK3311-X ambient light @0x48, QMI8658A IMU @0x6B,
+  # internal AW9523B @0x58/@0x59, and (via FPC passthrough) the
+  # Keyboard Bottom AW9523B @0x5A/@0x5B.
+  - name: i2c_master
+    type: i2c
+    role: master
+    config:
+      port: 0
+      pins:
+        sda: 2
+        scl: 1
+
+  # ST7789 TFT, 4-wire SPI (write-only, no MISO).
+  # SCLK=IO11, MOSI=IO13; CS/DC/RST live in the display device config.
+  - name: spi_display
+    type: spi
+    role: master
+    config:
+      spi_bus_config:
+        spi_port: SPI2_HOST
+        mosi_io_num: 13
+        miso_io_num: -1
+        sclk_io_num: 11
+        max_transfer_sz: 6400
+
+  # Separate SPI bus for the Media-IO push-in SD card slot (1-bit, SPI mode).
+  # SD CLK=IO5, CMD/DI=IO6, DAT0/DO=IO7, CD-DAT3/CS=IO8.
+  - name: spi_sdcard
+    type: spi
+    role: master
+    config:
+      spi_bus_config:
+        spi_port: SPI3_HOST
+        mosi_io_num: 6
+        miso_io_num: 7
+        sclk_io_num: 5
+        max_transfer_sz: 4096
+
+  # ST7789 backlight on IO14. Matches the same-family ST7789 reference
+  # board: output_invert true with duty 0 drives the backlight ON.
+  - name: ledc_backlight
+    type: ledc
+    role: none
+    config:
+      gpio_num: 14
+      freq_hz: 5000
+      duty: 0
+      duty_resolution: LEDC_TIMER_10_BIT
+      output_invert: true
+
+  # NS4168 mono class-D speaker amp on I2S port 0 (TX only).
+  # BCLK=IO17, LRCLK/WS=IO21, SDATA/DOUT=IO18. NS4168 has no MCLK input.
+  - name: i2s_audio_out
+    type: i2s
+    role: master
+    format: std-out
+    config:
+      port: 0
+      sample_rate_hz: 16000
+      mclk_multiple: 256
+      data_bit_width: 16
+      slot_bit_width: I2S_SLOT_BIT_WIDTH_AUTO
+      slot_mode: I2S_SLOT_MODE_STEREO
+      slot_mask: I2S_STD_SLOT_BOTH
+      ws_width: 16
+      pins:
+        mclk: -1
+        bclk: 17
+        ws: 21
+        dout: 18
+        din: -1
+
+  # ICS-43434 I2S MEMS microphone on I2S port 1 (RX only).
+  # SCK/BCLK=IO39, WS=IO9, SD/DIN=IO16. LR channel-select tied via IO46
+  # (gpio_ics43434_lr below). ICS-43434 has no MCLK input.
+  - name: i2s_audio_in
+    type: i2s
+    role: master
+    format: std-in
+    config:
+      port: 1
+      sample_rate_hz: 16000
+      mclk_multiple: 256
+      data_bit_width: 32
+      slot_bit_width: I2S_SLOT_BIT_WIDTH_AUTO
+      slot_mode: I2S_SLOT_MODE_MONO
+      slot_mask: I2S_STD_SLOT_LEFT
+      ws_width: 32
+      pins:
+        mclk: -1
+        bclk: 39
+        ws: 9
+        dout: -1
+        din: 16
+
+  # ICS-43434 L/R channel select. Driven low = left slot (matches
+  # i2s_audio_in I2S_STD_SLOT_LEFT above).
+  - name: gpio_ics43434_lr
+    type: gpio
+    role: io
+    config:
+      pin: 46
+      mode: GPIO_MODE_OUTPUT
+      pull_up: false

@@ -1,0 +1,1003 @@
+dependencies:
+  app_claw:
+    dependencies:
+    - name: cap_boards
+      path: ../../claw_capabilities/cap_boards
+    - name: cap_files
+      path: ../../claw_capabilities/cap_files
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_FILES} == True
+    - name: cap_im_platform
+      path: ../../claw_capabilities/cap_im_platform
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_IM_FEISHU} == True || $CONFIG{APP_CLAW_CAP_IM_QQ} == True || $CONFIG{APP_CLAW_CAP_IM_TG} == True || $CONFIG{APP_CLAW_CAP_IM_WECHAT} == True
+    - name: cap_im_local
+      path: ../../claw_capabilities/cap_im_local
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_IM_LOCAL} == True
+    - name: cap_llm_inspect
+      path: ../../claw_capabilities/cap_llm_inspect
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LLM_INSPECT} == True
+    - name: cap_lua
+      path: ../../claw_capabilities/cap_lua
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+    - name: cap_mcp_client
+      path: ../../claw_capabilities/cap_mcp_client
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_MCP_CLIENT} == True
+    - name: cap_mcp_server
+      path: ../../claw_capabilities/cap_mcp_server
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_MCP_SERVER} == True
+    - name: cap_router_mgr
+      path: ../../claw_capabilities/cap_router_mgr
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_ROUTER_MGR} == True
+    - name: cap_scheduler
+      path: ../../claw_capabilities/cap_scheduler
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_SCHEDULER} == True
+    - name: cap_session_mgr
+      path: ../../claw_capabilities/cap_session_mgr
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_SESSION_MGR} == True
+    - name: cap_skill_mgr
+      path: ../../claw_capabilities/cap_skill_mgr
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_SKILL_MGR} == True
+    - name: cap_system
+      path: ../../claw_capabilities/cap_system
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_SYSTEM} == True
+    - name: cap_time
+      path: ../../claw_capabilities/cap_time
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_TIME} == True
+    - name: cap_web_search
+      path: ../../claw_capabilities/cap_web_search
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_WEB_SEARCH} == True
+    - name: claw_cap
+      path: ../../claw_modules/claw_cap
+    - name: claw_core
+      path: ../../claw_modules/claw_core
+    - name: claw_event_router
+      path: ../../claw_modules/claw_event_router
+    - name: claw_memory
+      path: ../../claw_modules/claw_memory
+    - name: claw_skill
+      path: ../../claw_modules/claw_skill
+    - name: status_state
+      path: ../../common/status_state
+    - name: skill_builder
+      path: ../../common/skill_builder
+    - name: lua_module_builder
+      path: ../../common/lua_module_builder
+    - name: emote
+      path: ../emote
+      rules:
+      - if: $CONFIG{ESP_BOARD_DEV_DISPLAY_LCD_SUPPORT} == True
+      - if: $CONFIG{APP_CLAW_ENABLE_EMOTE} == True
+    - name: lua_driver_adc
+      path: ../../lua_modules/lua_driver_adc
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_DRIVER_ADC} == True
+    - name: lua_driver_gpio
+      path: ../../lua_modules/lua_driver_gpio
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_DRIVER_GPIO} == True
+    - name: lua_driver_i2c
+      path: ../../lua_modules/lua_driver_i2c
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_DRIVER_I2C} == True
+    - name: lua_driver_mcpwm
+      path: ../../lua_modules/lua_driver_mcpwm
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_DRIVER_MCPWM} == True
+    - name: lua_driver_pcnt
+      path: ../../lua_modules/lua_driver_pcnt
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_DRIVER_PCNT} == True
+    - name: lua_driver_touch
+      path: ../../lua_modules/lua_driver_touch
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_DRIVER_TOUCH} == True
+    - name: lua_driver_uart
+      path: ../../lua_modules/lua_driver_uart
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_DRIVER_UART} == True
+    - name: lua_module_audio
+      path: ../../lua_modules/lua_module_audio
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_AUDIO} == True
+      - if: $CONFIG{ESP_BOARD_DEV_AUDIO_CODEC_SUPPORT} == True
+    - name: lua_module_board_manager
+      path: ../../lua_modules/lua_module_board_manager
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_BOARD_MANAGER} == True
+    - name: lua_module_button
+      path: ../../lua_modules/lua_module_button
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_BUTTON} == True
+    - name: lua_module_call_capability
+      path: ../../lua_modules/lua_module_call_capability
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_CAPABILITY} == True
+    - name: lua_module_camera
+      path: ../../lua_modules/lua_module_camera
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_CAMERA} == True
+      - if: $CONFIG{ESP_BOARD_DEV_CAMERA_SUPPORT} == True
+    - name: lua_module_delay
+      path: ../../lua_modules/lua_module_delay
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_DELAY} == True
+    - name: lua_module_display
+      path: ../../lua_modules/lua_module_display
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_DISPLAY} == True
+    - name: lua_module_environmental_sensor
+      path: ../../lua_modules/lua_module_environmental_sensor
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_ENVIRONMENTAL_SENSOR} == True
+    - name: lua_module_event_publisher
+      path: ../../lua_modules/lua_module_event_publisher
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_EVENT_PUBLISHER} == True
+    - name: lua_module_http_server
+      path: ../../lua_modules/lua_module_http_server
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_HTTP_SERVER} == True
+    - name: lua_module_json
+      path: ../../lua_modules/lua_module_json
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_JSON} == True
+    - name: lua_module_fuel_gauge
+      path: ../../lua_modules/lua_module_fuel_gauge
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_FUEL_GAUGE} == True
+    - name: lua_module_imu
+      path: ../../lua_modules/lua_module_imu
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_IMU} == True
+    - name: lua_module_ir
+      path: ../../lua_modules/lua_module_ir
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_IR} == True
+    - name: lua_module_knob
+      path: ../../lua_modules/lua_module_knob
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_KNOB} == True
+    - name: lua_module_lcd
+      path: ../../lua_modules/lua_module_lcd
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_LCD} == True
+    - name: lua_module_lcd_touch
+      path: ../../lua_modules/lua_module_lcd_touch
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_LCD_TOUCH} == True
+      - if: $CONFIG{ESP_BOARD_DEV_LCD_TOUCH_SUPPORT} == True
+      - if: $CONFIG{ESP_BOARD_DEV_LCD_TOUCH_SUB_I2C_SUPPORT} == True
+    - name: lua_module_led_strip
+      path: ../../lua_modules/lua_module_led_strip
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_LED_STRIP} == True
+    - name: lua_module_magnetometer
+      path: ../../lua_modules/lua_module_magnetometer
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_MAGNETOMETER} == True
+    - name: lua_module_sci
+      path: ../../lua_modules/lua_module_sci
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_SCI} == True
+    - name: lua_module_ssd1306
+      path: ../../lua_modules/lua_module_ssd1306
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_SSD1306} == True
+    - name: lua_module_storage
+      path: ../../lua_modules/lua_module_storage
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_STORAGE} == True
+    - name: lua_module_system
+      path: ../../lua_modules/lua_module_system
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_SYSTEM} == True
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/app_claw
+      type: local
+    version: '*'
+  app_config:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/application/edge_agent/components/app_config
+      type: local
+    version: '*'
+  cap_boards:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_boards
+      type: local
+    version: '*'
+  cap_files:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_files
+      type: local
+    version: '*'
+  cap_im_local:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_im_local
+      type: local
+    version: '*'
+  cap_im_platform:
+    dependencies:
+    - name: espressif/esp_websocket_client
+      version: ^1.4.0
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_im_platform
+      type: local
+    version: '*'
+  cap_llm_inspect:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_llm_inspect
+      type: local
+    version: '*'
+  cap_lua:
+    dependencies:
+    - name: georgik/lua
+      version: ^5.5.0~7
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_lua
+      type: local
+    version: '*'
+  cap_mcp_client:
+    dependencies:
+    - name: espressif/mdns
+      version: ^1.10.1
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_mcp_client
+      type: local
+    version: '*'
+  cap_mcp_server:
+    dependencies:
+    - name: espressif/mdns
+      version: ^1.10.1
+    - name: espressif/mcp-c-sdk
+      version: ^1.0.0
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_mcp_server
+      type: local
+    version: '*'
+  cap_router_mgr:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_router_mgr
+      type: local
+    version: '*'
+  cap_scheduler:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_scheduler
+      type: local
+    version: '*'
+  cap_session_mgr:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_session_mgr
+      type: local
+    version: '*'
+  cap_skill_mgr:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_skill_mgr
+      type: local
+    version: '*'
+  cap_system:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_system
+      type: local
+    version: '*'
+  cap_time:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_time
+      type: local
+    version: '*'
+  cap_web_search:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_capabilities/cap_web_search
+      type: local
+    version: '*'
+  captive_dns:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/captive_dns
+      type: local
+    version: '*'
+  claw_cap:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_modules/claw_cap
+      type: local
+    version: '*'
+  claw_core:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_modules/claw_core
+      type: local
+    version: '*'
+  claw_event_router:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_modules/claw_event_router
+      type: local
+    version: '*'
+  claw_memory:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_modules/claw_memory
+      type: local
+    version: '*'
+  claw_skill:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/claw_modules/claw_skill
+      type: local
+    version: '*'
+  display_arbiter:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/display_arbiter
+      type: local
+    version: '*'
+  emote:
+    dependencies:
+    - name: display_arbiter
+      path: ../display_arbiter
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/emote
+      type: local
+    version: '*'
+  esp_io_expander_aw9523b:
+    dependencies:
+    - name: espressif/esp_io_expander
+      public: true
+      version: ^1.0.1
+    - name: idf
+      version: '>=5.2'
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/application/edge_agent/boards/attaky/agent_deck_1_0/components/esp_io_expander_aw9523b
+      type: local
+    version: 1.0.0
+  esp_painter:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/esp_painter
+      type: local
+    version: '*'
+  espressif/button:
+    component_hash: d0afa32f0e50d60bc0c6fc23f7eea98adc6b02cfe70b590bc52c23c506745287
+    dependencies:
+    - name: espressif/cmake_utilities
+      registry_url: https://components.espressif.com
+      require: private
+      version: '*'
+    - name: idf
+      require: private
+      version: '>=4.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 4.1.6
+  espressif/cmake_utilities:
+    component_hash: 12be4a3fa6082b923040ac65aacdaa6cc03c30902673ff525100c80da1430a4e
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.1'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 0.5.0
+  espressif/esp-dsp:
+    component_hash: ed9ac175b14e0414399a2b33c525579414b5bad19a2a67b12ea212def96f9a98
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.2'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.8.2
+  espressif/esp_board_manager:
+    component_hash: 559e8fbd848c9bb29064b280099b0befd0ec5f8bf42483b95aac95f954e9f4a1
+    dependencies:
+    - matches:
+      - if: $CONFIG{ESP_BOARD_DEV_BUTTON_SUPPORT} == True
+      name: espressif/button
+      registry_url: https://components.espressif.com
+      require: private
+      version: ^4.1.4
+    - matches:
+      - if: $CONFIG{ESP_BOARD_DEV_AUDIO_CODEC_SUPPORT} == True
+      name: espressif/esp_codec_dev
+      registry_url: https://components.espressif.com
+      require: private
+      version: ~1.5
+    - matches:
+      - if: $CONFIG{ESP_BOARD_DEV_GPIO_EXPANDER_SUPPORT} == True
+      name: espressif/esp_io_expander
+      registry_url: https://components.espressif.com
+      require: private
+      version: ^1.0.1
+    - matches:
+      - if: $CONFIG{ESP_BOARD_DEV_DISPLAY_LCD_SUB_RGB_3WIRE_SPI_SUPPORT} == True
+      name: espressif/esp_lcd_panel_io_additions
+      registry_url: https://components.espressif.com
+      require: private
+      version: ^1.0.0
+    - matches:
+      - if: $CONFIG{ESP_BOARD_DEV_LCD_TOUCH_I2C_SUPPORT} == True
+      - if: $CONFIG{ESP_BOARD_DEV_LCD_TOUCH_SUPPORT} == True
+      name: espressif/esp_lcd_touch
+      registry_url: https://components.espressif.com
+      require: private
+      version: '*'
+    - matches:
+      - if: $CONFIG{ESP_BOARD_DEV_CAMERA_SUPPORT} == True
+      name: espressif/esp_video
+      registry_url: https://components.espressif.com
+      require: private
+      version: ^2.0.0
+    - matches:
+      - if: $CONFIG{ESP_BOARD_DEV_LED_STRIP_SUPPORT} == True
+      name: espressif/led_strip
+      registry_url: https://components.espressif.com
+      require: private
+      version: '*'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 0.5.11
+  espressif/esp_codec_dev:
+    component_hash: 896c67360ae1f8dedaf8a53dfe48c015317fa455f061a5165307892296990028
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.0'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 1.5.10
+  espressif/esp_io_expander:
+    component_hash: 7b7f91270172e46ca4597e3874f48d8412e280e8c295559f5922ec38656e3e5f
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.4.2'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.2.1
+  espressif/esp_lcd_touch:
+    component_hash: 3f85a7d95af876f1a6ecca8eb90a81614890d0f03a038390804e5a77e2caf862
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.4.2'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.2.1
+  espressif/esp_lcd_touch_ft5x06:
+    component_hash: 8ae101b4a321b6327d98751b049e3c7fff2718ad04d676259369ff85d4edbcdf
+    dependencies:
+    - name: espressif/esp_lcd_touch
+      registry_url: https://components.espressif.com
+      require: public
+      version: ^1.2.0
+    - name: idf
+      require: private
+      version: '>=5.2'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.1.0~1
+  espressif/esp_mmap_assets:
+    component_hash: 91d785326b03db15e2f7f1314d8c976d38f21aa5759b570dcbbc89bcf247fd27
+    dependencies:
+    - name: espressif/cmake_utilities
+      registry_url: https://components.espressif.com
+      require: private
+      version: 0.*
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 1.4.0
+  espressif/esp_new_jpeg:
+    component_hash: 98823384f51ca298e2c9bebacd1c629148e528ed0902d18b16556df151519e68
+    dependencies: []
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    targets:
+    - esp32
+    - esp32s2
+    - esp32s3
+    - esp32s31
+    - esp32p4
+    - esp32c2
+    - esp32c3
+    - esp32c5
+    - esp32c6
+    - esp32c61
+    - esp32h4
+    version: 1.0.1
+  espressif/esp_websocket_client:
+    component_hash: 3fb288702517ef4d75bf933a115f1056ee0c2540d964f9e1d856e0bb67e1dfeb
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.7.0
+  espressif/freetype:
+    component_hash: a4169cdd22b3572342b2d640d7082405b8895e3214539283601c03412589b65d
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.4'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 2.14.2
+  espressif/i2c_bus:
+    component_hash: 804ec068d163570fd367b279a310ca383484630d2310c586b50def0bcf21de13
+    dependencies:
+    - name: espressif/cmake_utilities
+      registry_url: https://components.espressif.com
+      require: private
+      version: '*'
+    - name: idf
+      require: private
+      version: '>=4.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.5.1
+  espressif/led_strip:
+    component_hash: 28621486f77229aaf81c71f5e15d6fbf36c2949cf11094e07090593e659e7639
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 3.0.3
+  espressif/libpng:
+    component_hash: 30b1f2f8ddf13754b3e21d7ac134b3cc8f02957bb01d0c6deb5e9a68080d69d5
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    - name: espressif/zlib
+      registry_url: https://components.espressif.com
+      require: private
+      version: ^1.2.13
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.6.58
+  espressif/mcp-c-sdk:
+    component_hash: 8814a390e798712d6841569827e836850188f44edd00a4dfc0bbda178376a33c
+    dependencies:
+    - name: espressif/cmake_utilities
+      registry_url: https://components.espressif.com
+      require: private
+      version: 0.*
+    - name: idf
+      require: private
+      version: '>=5.4'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.0.0
+  espressif/mdns:
+    component_hash: 8bcf12e37c58c1d584aef32a02b92548124c7a3a9fcf548d3235c844a035e0f0
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.11.1
+  espressif/zlib:
+    component_hash: 64ea2fd6754c5a05951f1ddb312ac835cd782e68cb5bd9dfcd1c3a107c8fbfbc
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=4.4'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 1.3.2
+  espressif2022/esp_emote_assets:
+    component_hash: 1f1ed784c66234e6643b7865f9b1e117bdc71cb5b6c2208b720ea485db76e53a
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 0.1.2
+  espressif2022/esp_emote_expression:
+    component_hash: 2454f176798d80bfe4220015608cbca9341b6671bcada1305d1fac7a81c40237
+    dependencies:
+    - name: espressif/cmake_utilities
+      registry_url: https://components.espressif.com
+      require: public
+      version: 0.5.0
+    - name: espressif/esp_mmap_assets
+      registry_url: https://components.espressif.com
+      require: public
+      version: 1.*
+    - name: espressif2022/esp_emote_assets
+      registry_url: https://components.espressif.com
+      require: private
+      version: ^0.1.0
+    - name: espressif2022/esp_emote_gfx
+      registry_url: https://components.espressif.com
+      require: public
+      version: <=3.0.5
+    - name: idf
+      require: private
+      version: '>=5.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 1.0.1
+  espressif2022/esp_emote_gfx:
+    component_hash: 2aca001668978e0f4a16f84b2a4b811565fb0710b8391aea77d5fd4560a5269a
+    dependencies:
+    - name: espressif/cmake_utilities
+      registry_url: https://components.espressif.com
+      require: private
+      version: 0.*
+    - name: espressif/esp_lcd_touch
+      registry_url: https://components.espressif.com
+      require: public
+      version: '>=1.0'
+    - name: espressif/esp_new_jpeg
+      registry_url: https://components.espressif.com
+      require: public
+      version: 1.*
+    - name: espressif/freetype
+      registry_url: https://components.espressif.com
+      require: private
+      version: 2.*
+    - name: idf
+      require: private
+      version: '>=5.0'
+    - name: laride/heatshrink
+      registry_url: https://components.espressif.com
+      require: private
+      version: ^0.4.1
+    - name: lvgl/lvgl
+      registry_url: https://components.espressif.com
+      require: public
+      version: '*'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 3.0.2
+  georgik/lua:
+    component_hash: 10698fd2d729b63cca8b882e219c3fa3bd8a9adea26f814f2febb624d0385c23
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5.0.0'
+    source:
+      registry_url: https://components.espressif.com/
+      type: service
+    version: 5.5.0~7
+  http_reuse:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/http_reuse
+      type: local
+    version: '*'
+  http_server:
+    dependencies:
+    - name: cap_im_local
+      path: ../../../../components/claw_capabilities/cap_im_local
+    - name: lua_module_http_server
+      path: ../../../../components/lua_modules/lua_module_http_server
+      rules:
+      - if: $CONFIG{APP_CLAW_CAP_LUA} == True
+      - if: $CONFIG{APP_CLAW_LUA_MODULE_HTTP_SERVER} == True
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/application/edge_agent/components/http_server
+      type: local
+    version: '*'
+  idf:
+    source:
+      type: idf
+    version: 5.5.4
+  laride/heatshrink:
+    component_hash: 0828b0fea3f0754f8404a5279e883c52fe27494bbe1762e38d5cd96c99229e47
+    dependencies:
+    - name: idf
+      require: private
+      version: '>=5'
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 0.4.1
+  lua_driver_adc:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_driver_adc
+      type: local
+    version: '*'
+  lua_driver_gpio:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_driver_gpio
+      type: local
+    version: '*'
+  lua_driver_i2c:
+    dependencies:
+    - name: espressif/i2c_bus
+      version: ^1.5.1
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_driver_i2c
+      type: local
+    version: '*'
+  lua_driver_mcpwm:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_driver_mcpwm
+      type: local
+    version: '*'
+  lua_driver_pcnt:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_driver_pcnt
+      type: local
+    version: '*'
+  lua_driver_touch:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_driver_touch
+      type: local
+    version: '*'
+  lua_driver_uart:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_driver_uart
+      type: local
+    version: '*'
+  lua_module_audio:
+    dependencies:
+    - name: espressif/esp_codec_dev
+      version: '*'
+    - name: espressif/esp-dsp
+      version: '*'
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_audio
+      type: local
+    version: '*'
+  lua_module_board_manager:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_board_manager
+      type: local
+    version: '*'
+  lua_module_builder:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/lua_module_builder
+      type: local
+    version: '*'
+  lua_module_button:
+    dependencies:
+    - name: espressif/button
+      version: '*'
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_button
+      type: local
+    version: '*'
+  lua_module_call_capability:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_call_capability
+      type: local
+    version: '*'
+  lua_module_delay:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_delay
+      type: local
+    version: '*'
+  lua_module_display:
+    dependencies:
+    - name: espressif/libpng
+      version: ^1.6.55
+    - name: esp_painter
+      path: ../../common/esp_painter
+    - name: display_arbiter
+      path: ../../common/display_arbiter
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_display
+      type: local
+    version: '*'
+  lua_module_event_publisher:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_event_publisher
+      type: local
+    version: '*'
+  lua_module_http_server:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_http_server
+      type: local
+    version: '*'
+  lua_module_json:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_json
+      type: local
+    version: '*'
+  lua_module_lcd_touch:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_lcd_touch
+      type: local
+    version: '*'
+  lua_module_led_strip:
+    dependencies:
+    - name: espressif/led_strip
+      version: ^3.0.3
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_led_strip
+      type: local
+    version: '*'
+  lua_module_ssd1306:
+    dependencies:
+    - name: lua_driver_i2c
+      path: ../lua_driver_i2c
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_ssd1306
+      type: local
+    version: '*'
+  lua_module_storage:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_storage
+      type: local
+    version: '*'
+  lua_module_system:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/lua_modules/lua_module_system
+      type: local
+    version: '*'
+  lvgl/lvgl:
+    component_hash: 184e532558c1c45fefed631f3e235423d22582aafb4630f3e8885c35281a49ae
+    dependencies: []
+    source:
+      registry_url: https://components.espressif.com
+      type: service
+    version: 9.5.0
+  settings:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/settings
+      type: local
+    version: '*'
+  setup_ui:
+    dependencies:
+    - name: claw_core
+      path: ../../claw_modules/claw_core
+    - name: display_arbiter
+      path: ../display_arbiter
+    - name: emote
+      path: ../emote
+    - name: wifi_manager
+      path: ../wifi_manager
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/setup_ui
+      type: local
+    version: '*'
+  skill_builder:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/skill_builder
+      type: local
+    version: '*'
+  status_led:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/status_led
+      type: local
+    version: '*'
+  status_state:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/status_state
+      type: local
+    version: '*'
+  wifi_manager:
+    dependencies: []
+    source:
+      path: /Users/thinkroid/Desktop/Attaky_project/attaky-firmware-projects/esp-claw/main/components/common/wifi_manager
+      type: local
+    version: '*'
+direct_dependencies:
+- app_claw
+- app_config
+- cap_im_local
+- captive_dns
+- emote
+- esp_io_expander_aw9523b
+- espressif/button
+- espressif/esp_board_manager
+- espressif/esp_lcd_touch
+- espressif/esp_lcd_touch_ft5x06
+- espressif2022/esp_emote_expression
+- espressif2022/esp_emote_gfx
+- http_reuse
+- http_server
+- lua_module_http_server
+- settings
+- setup_ui
+- status_led
+- wifi_manager
+manifest_hash: f7d189dbd2d6719778e9b086dab25db13341fa60a7742e43ab07b337e75baa11
+target: esp32s3
+version: 2.0.0
